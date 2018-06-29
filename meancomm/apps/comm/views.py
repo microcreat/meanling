@@ -24,15 +24,18 @@ def comm_process(request):
         return HttpResponse(json.dumps(resp), content_type="application/json", status="201" )
     elif request.method == 'POST':
         story_data=request.body.decode('utf-8')
-        name=story_data.index('name')       
-        notes=story_data.index('notes')           
+        story_data="".join(story_data.split())
+        story_data=re.sub('"','',story_data)
+        story_data=re.sub(':','=',story_data)
+        #name=story_data.index('name')       
+        #notes=story_data.index('notes')           
         name=re.findall(r"name=(\w+)",story_data)     
         notes=re.findall(r"notes=(\w+)",story_data)
         addarticle=Article()
-        addarticle.title=name[0]
-        addarticle.content=notes[0]
+        addarticle.title=name
+        addarticle.content=notes
         addarticle.save()
-        #return HttpResponse("Welcome to the page at %s" %request.body)
+        #return HttpResponse("Welcome to the page at %s" %story_data)
         return HttpResponseRedirect('/comm/index')
 
 def addarticle(request):

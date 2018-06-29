@@ -8,7 +8,7 @@
 <a href="{% url 'addarticle' %}">Add</a>
 <ul>
     {% for til in titles %}
-		<li>title:{{til.id}} {{til.title}} {{til.content}}  <a href="{% url 'delarticle' til.id %}">Delete</a></li> 
+		<li>{{til.id}}:{{til.title}} {{til.content}}  <a href="{% url 'delarticle' til.id %}">Delete</a></li> 
     {% endfor %}
 </ul>
 
