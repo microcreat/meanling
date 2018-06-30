@@ -30,13 +30,13 @@ def comm_process(request):
         #name=story_data.index('name')       
         #notes=story_data.index('notes')           
         name=re.findall(r"name=(\w+)",story_data)     
-        notes=re.findall(r"notes=(\w+)",story_data)
+        option=re.findall(r"option=(\w+)",story_data)
         addarticle=equipment()
-        addarticle.title=name
-        addarticle.content=notes
+        addarticle.name=name
+        addarticle.option=option
         addarticle.save()
-        #return HttpResponse("Welcome to the page at %s" %story_data)
-        return HttpResponseRedirect('/comm/index')
+        return HttpResponse("Welcome to the page at %s" %story_data)
+        #return HttpResponseRedirect('/comm/index')
 
 def addarticle(request):
         addarticle=equipment()
