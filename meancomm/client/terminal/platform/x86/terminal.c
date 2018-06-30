@@ -27,7 +27,7 @@ int cjson_post(char *ip,int port,char *page,char *msg)
     char content_len[50];  
     sprintf(content_len,"Content-Length: %d\r\n\r\n",strlen(msg));  
     sprintf(content,"%s%s%s%s%s",content_page,content_host,content_type,content_len,msg);  
-
+    printf("rev:\n%s\n", content);
     if((sockfd = socket(AF_INET,SOCK_STREAM,0)) < 0)  
         printf("socket error\n");  
     bzero(&servaddr,sizeof(servaddr));  
@@ -58,8 +58,8 @@ int main(int argc, char **argv)
 	printf("cJSON Version: %s\n", cJSON_Version());
 	json = cJSON_CreateObject();
 	cJSON_AddItemToObject(json, "name", cJSON_CreateString("Jack")); 
-	cJSON_AddItemToObject(json, "id", cJSON_CreateString("12312")); 
-	cJSON_AddItemToObject(json, "notes", cJSON_CreateString("notesmeanning"));
+	cJSON_AddItemToObject(json, "option", cJSON_CreateString("12312")); 
+	cJSON_AddItemToObject(json, "first", cJSON_CreateString("notesmeanning"));
 	sjson = cJSON_Print(json);
     cJSON_Delete(json);
 	 
