@@ -11,12 +11,12 @@ import json
 import requests
 
 from datetime import date
-from comm.models import Article
+from comm.models import equipment
 import re
 
 def index(request):
-		titles=Article.objects.all()
-		return render(request, 'comm/index.html', {'titles':titles})
+        titles=equipment.objects.all()
+        return render(request, 'comm/index.html', {'titles':titles})
 
 def comm_process(request):                       
     resp = {'errorcode': 100, 'detail': 'Get success'}
@@ -31,7 +31,7 @@ def comm_process(request):
         #notes=story_data.index('notes')           
         name=re.findall(r"name=(\w+)",story_data)     
         notes=re.findall(r"notes=(\w+)",story_data)
-        addarticle=Article()
+        addarticle=equipment()
         addarticle.title=name
         addarticle.content=notes
         addarticle.save()
@@ -39,14 +39,14 @@ def comm_process(request):
         return HttpResponseRedirect('/comm/index')
 
 def addarticle(request):
-        addarticle=Article()
+        addarticle=equipment()
         addarticle.title='mean'
         addarticle.content='mean'
         addarticle.save()
         return HttpResponseRedirect('/comm/index')
 
 def delarticle(request, id):
-        dart=Article.objects.get(id=int(id))
+        dart=equipment.objects.get(id=int(id))
         dart.delete()
         return HttpResponseRedirect('/comm/index')
 
