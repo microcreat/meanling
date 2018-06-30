@@ -32,11 +32,11 @@ def comm_process(request):
         name=re.findall(r"name=(\w+)",story_data)     
         option=re.findall(r"option=(\w+)",story_data)
         addarticle=equipment()
-        addarticle.name=name
-        addarticle.option=option
+        addarticle.name="".join(name)
+        addarticle.option="".join(option)
         addarticle.save()
-        return HttpResponse("Welcome to the page at %s" %story_data)
-        #return HttpResponseRedirect('/comm/index')
+        #return HttpResponse("Welcome to the page at %s" %story_data)
+        return HttpResponseRedirect('/comm/index')
 
 def addarticle(request):
         addarticle=equipment()
